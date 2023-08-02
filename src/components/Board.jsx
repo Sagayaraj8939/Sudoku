@@ -40,7 +40,8 @@ function Board({
     solve,
     unSolve,
     setUnSolve,
-    setShowWinMsg
+    setShowWinMsg,
+    setClick
   } = useBoardContext();
   // const arr = Array.from({ length: 9 }, (v) =>
   //   Array.from({ length: 9 }, (v) => "")
@@ -90,6 +91,7 @@ function Board({
         return [...val];
       });
     }
+    setClick(() => 9);
     unSolvedArray.current = lvarr.map((val) => [...val]);
     setUnSolve(() => false);
     if (changeLevel !== null) level.current = changeLevel.toLowerCase();
@@ -113,6 +115,7 @@ function Board({
       //   }
     }
     if (solve) {
+      setClick(() => 9);
       setNum(() => fillCell.current);
       if (board.some((val) => val.some((val1) => val1 === ""))) {
         // setSolve(() => false);
@@ -133,6 +136,7 @@ function Board({
 
   useEffect(() => {
     if (unSolve) {
+      setClick(() => 9);
       if (unSolvedArray.current.length > 0) {
         // const oldNum = board[fillPoint.current[0]][fillPoint.current[1]];
         // console.log(unSolve);
@@ -193,6 +197,8 @@ function Board({
 
   useEffect(() => {
     const undoBox = undoArr.current.pop();
+    setNum(() => "");
+    setClick(() => 9);
     if (undoBox !== undefined) {
       redoArr.current.push(undoBox);
       setBoard((board) => {
@@ -200,20 +206,21 @@ function Board({
           return [...val];
         });
         board1[undoBox[0]][undoBox[1]] = "";
-        undoArr.current.forEach((val) => {
-          board1[val[0]][val[1]] = val[2];
-        });
+        // undoArr.current.forEach((val) => {
+        //   board1[val[0]][val[1]] = val[2];
+        // });
         return board1;
       });
       // } else {
       //   console.log(undoBox);
     }
-    console.log(undoArr.current);
+    // console.log(undoArr.current);
     // console.log(redoArr.current);
   }, [undo]);
 
   useEffect(() => {
     const redoBox = redoArr.current.pop();
+    setClick(() => 9);
     if (redoBox !== undefined) {
       undoArr.current.push(redoBox);
       setBoard((board) => {

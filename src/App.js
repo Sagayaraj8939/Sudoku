@@ -22,6 +22,7 @@ export default function App() {
   // console.log(board);
   // console.log(easy);
   const [lvl, setLvl] = useState("Easy");
+  const [click, setClick] = useState(9);
   // const dummy = useRef(1);
   const level = ["Easy", "Medium", "Hard"];
   const [reset, setReset] = useState(false);
@@ -101,7 +102,9 @@ export default function App() {
         unSolve,
         showWinMsg,
         setShowWinMsg,
-        resetClick
+        resetClick,
+        click,
+        setClick
       }}
     >
       <div className="App">

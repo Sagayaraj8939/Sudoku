@@ -5,10 +5,10 @@ import { useBoardContext } from "./BoardContext.js";
 function Numpad({ changeNum, displayNum, hideNum, currentCell }) {
   // const [isClick, set]
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, "Erase"];
-  const { board, solve } = useBoardContext();
+  const { click, setClick } = useBoardContext();
   const [numArray] = useState(numbers);
   const [cell, setCell] = useState([]);
-  const [click, setClick] = useState(9);
+  // const [click, setClick] = useState(9);
 
   function handleClick(val) {
     // console.log(val);
